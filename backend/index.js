@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://infinity-ai-1-6ot2.onrender.com/",
+    origin: "https://infinity-ai-1-6ot2.onrender.com",
     credentials: true,
   })
 );
