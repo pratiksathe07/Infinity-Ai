@@ -198,15 +198,30 @@ export const generateWebsite = async (req, res) => {
             });
         }
 
+        // const website = await Website.create({
+        //     user:user._id,
+        //     title:prompt.slice(0,60),
+        //     latestCode: parsed.code,
+        //     conversation:[
+        //         {role:"user", content:prompt},
+        //         {role:"ai", content:parsed.message},
+        //     ]
+        // })
+
+
+        const title = prompt.slice(0, 60);
+
         const website = await Website.create({
-            user:user._id,
-            title:prompt.slice(0,60),
+            user: user._id,
+            title,
             latestCode: parsed.code,
-            conversation:[
-                {role:"user", content:prompt},
-                {role:"ai", content:parsed.message},
+            slug: `${title.toLowerCase().replace(/[^a-z0-9]/g, "")}-${Date.now()}`,
+            conversation: [
+                { role: "user", content: prompt },
+                { role: "ai", content: parsed.message },
             ]
-        })
+        });
+
 
         user.credits = user.credits -10
         await user.save()
